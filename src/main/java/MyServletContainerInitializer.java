@@ -9,7 +9,14 @@ import java.util.Set;
 public class MyServletContainerInitializer implements ServletContainerInitializer {
     @Override
     public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException {
-        System.out.println("Custom ServletContainerInitializer 실행됨");
-        // 여기서 ServletContext 리스너나 다른 초기화 로직 등록 가능
+        for (Class<?> initClass : c) {
+            try {
+                MyWebAppInitializer initializer = (MyWebAppInitializer) initClass.getDeclaredConstructor().newInstance();
+
+                initializer.onStartup(ctx);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
