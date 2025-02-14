@@ -2,6 +2,7 @@ import jakarta.servlet.ServletContainerInitializer;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.HandlesTypes;
+import org.springframework.util.ReflectionUtils;
 
 import java.util.Set;
 
@@ -11,7 +12,7 @@ public class MyServletContainerInitializer implements ServletContainerInitialize
     public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException {
         for (Class<?> initClass : c) {
             try {
-                MyWebAppInitializer initializer = (MyWebAppInitializer) initClass.getDeclaredConstructor().newInstance();
+                MyWebAppInitializer initializer = (MyWebAppInitializer) ReflectionUtils.accessibleConstructor(initClass).newInstance();
 
                 initializer.onStartup(ctx);
             } catch (Exception e) {
