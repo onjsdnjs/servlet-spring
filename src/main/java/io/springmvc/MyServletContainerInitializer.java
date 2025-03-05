@@ -1,3 +1,5 @@
+package io.springmvc;
+
 import jakarta.servlet.ServletContainerInitializer;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -14,7 +16,7 @@ public class MyServletContainerInitializer implements ServletContainerInitialize
             try {
                 MyWebAppInitializer initializer = (MyWebAppInitializer) ReflectionUtils.accessibleConstructor(initClass).newInstance();
 
-                initializer.onStartup(ctx);
+//                initializer.onStartup(ctx);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

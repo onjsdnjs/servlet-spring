@@ -1,3 +1,5 @@
+package io.springmvc;
+
 import jakarta.servlet.ServletContext;
 
 public interface MyWebAppInitializer {

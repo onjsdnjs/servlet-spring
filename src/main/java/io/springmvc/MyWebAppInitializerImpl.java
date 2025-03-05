@@ -1,3 +1,5 @@
+package io.springmvc;
+
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletRegistration;
 import org.springframework.web.context.ContextLoaderListener;
@@ -15,7 +17,7 @@ public class MyWebAppInitializerImpl implements MyWebAppInitializer {
         // 서블릿 컨텍스트 설정
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.setServletContext(servletContext);
-//        context.register(AppConfig.class);
+        context.register(WebConfig.class);
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
